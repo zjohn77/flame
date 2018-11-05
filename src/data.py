@@ -1,8 +1,7 @@
 from torchvision import datasets, transforms
 import torch as t
 
-# Declare constants.
-BATCH_SIZE = 100
+BATCH_SIZE = 500
 MEAN = 0.1307
 STANDARD_DEV = 0.3081
 
@@ -16,7 +15,7 @@ TRAIN_DATASET = datasets.MNIST(root = '../data',
                                 download = True,
                                 transform = TRANSF
                                 )
-TEST_DATASET = datasets.MNIST(root = '../data', 
+HOLDOUT_DATASET = datasets.MNIST(root = '../data', 
                                 train = False, 
                                 download = False,
                                 transform = TRANSF
@@ -25,7 +24,7 @@ train_loader = t.utils.data.DataLoader(dataset = TRAIN_DATASET,
                                         batch_size = BATCH_SIZE, 
                                         shuffle = True
                                       )
-test_loader = t.utils.data.DataLoader(dataset = TEST_DATASET,
+holdout_loader = t.utils.data.DataLoader(dataset = HOLDOUT_DATASET,
                                         batch_size = BATCH_SIZE, 
                                         shuffle = True
                                      )
