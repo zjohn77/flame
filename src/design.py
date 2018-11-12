@@ -1,26 +1,38 @@
-import torch as t
-from torch.nn import Sequential, Conv2d, ReLU, MaxPool2d, Dropout, Linear, CrossEntropyLoss
+from torch.nn import Module, Sequential, Conv2d, ReLU, MaxPool2d, Dropout, Linear
 
-class ConvNet(t.nn.Module):
-    def __init__(self):
+class ConvNet(Module):
+    ''' '''
+    def __init__(self, kernel_size, stride, padding):
+        ''' '''
         super().__init__()
-        self.layer1 = Sequential(Conv2d(1, 32, kernel_size=5, padding=2),
-                                 ReLU(),
-                                 MaxPool2d(kernel_size=2, stride=2)
-                                )        
-        self.layer2 = Sequential(Conv2d(32, 64, kernel_size=5, padding=2),
-                                 ReLU(),
-                                 MaxPool2d(kernel_size=2, stride=2)
-                                )
-        self.drop_out = Dropout()
-        self.fc1 = Linear(7 * 7 * 64, 1000)
-        self.fc2 = Linear(1000, 10)                                
+        self.conv_layer_1 = Sequential(Conv2d(1, 
+                                             16, 
+                                             kernel_size, 
+                                             stride, 
+                                             padding
+                                            ),
+                                      ReLU(),
+                                      MaxPool2d(2, 2)
+                                     )        
+        self.conv_layer_2 = Sequential(Conv2d(16, 
+                                             32, 
+                                             kernel_size, 
+                                             stride, 
+                                             padding
+                                            ),
+                                      ReLU(),
+                                      MaxPool2d(2, 2)
+                                     )   
+        self.dropout = Dropout()
+        self.full_connect_1 = Linear(7 * 7 * 32, 50)
+        self.full_connect_2 = Linear(50, 10)                                
 
-    def forward(self, x):
-        out = self.layer1(x)
-        out = self.layer2(out)
-        out = out.reshape(out.size(0), -1)
-        out = self.drop_out(out)
-        out = self.fc1(out)
-        out = self.fc2(out)
+    def forward(self, _input):
+        ''' '''
+        out = self.conv_layer_1(_input)
+        out = self.conv_layer_2(out)        
+        out = out.reshape(len(out), -1)
+        out = self.dropout(out)
+        out = self.full_connect_1(out)
+        out = self.full_connect_2(out)
         return out
