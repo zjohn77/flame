@@ -33,23 +33,19 @@ class Accuracy:
               f' {self.correct_tally / len(self.holdout.dataset) * 100}%')
 
 if __name__ == '__main__':
-    ## hyperparameters
-    KERNEL_SIZE = 5
-    STRIDE = 1
-    PADDING = int((KERNEL_SIZE - 1) / 2)
-    convnet = ConvNet(KERNEL_SIZE, STRIDE, PADDING)
-
-    LEARN_RATE = 0.001
-    OPTIMIZER = t.optim.Adam(convnet.parameters(), 
-                            lr = LEARN_RATE)   
-    LOSS_FUNC = CrossEntropyLoss()
-    N_EPOCHS = 2
-    
-    fit(convnet, 
-        train_loader, 
-        OPTIMIZER, 
-        LOSS_FUNC,
-        N_EPOCHS
-    )
+    KERNEL_SIZE = 3
+    convnet = ConvNet(input_dim = 28
+                      kernel_size = KERNEL_SIZE,
+                      stride = 1,
+                      padding = int((KERNEL_SIZE - 1) / 2)
+                     )
+    fit(model = convnet, 
+        training = train_loader, 
+        optimizer = t.optim.Adam(convnet.parameters(), 
+                                 lr = 0.001
+                                ),   ## lr: the learn rate
+        loss_func = CrossEntropyLoss(),
+        n_epochs = 2
+       )
     accuracy = Accuracy(convnet, holdout_loader)
     print(f'{accuracy}')   
