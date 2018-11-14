@@ -1,3 +1,6 @@
+
+
+
 KERNEL_SIZE = 3
 convnet = ConvNet(input_dim = 28,
                   kernel_size = KERNEL_SIZE,
