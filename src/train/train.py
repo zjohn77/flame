@@ -1,8 +1,11 @@
-from data import train_loader, holdout_loader
-from models import ConvNet
-import torch as t
-from torch.nn import CrossEntropyLoss
-
+"""
+Trains a deep neural network when passed these 5 arguments:
+      * a model instance, 
+      * training sample,
+      * optimizer (commonly Adam or SGD),
+      * loss function
+      * number of epochs
+"""
 def fit(model, training, optimizer, loss_func, n_epochs):   
    '''trains a network when given features (x) and labels (y).
    '''

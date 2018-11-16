@@ -1,3 +1,6 @@
+"""
+Define ConvNet as a model to be imported by main.py in order to fit a convolutional network. 
+"""
 from torch.nn import Module, Sequential, Conv2d, ReLU, MaxPool2d, Dropout, Linear
 
 class ConvNet(Module):
