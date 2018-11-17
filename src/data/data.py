@@ -16,12 +16,12 @@ _transf = transforms.Compose([transforms.ToTensor(),
                                                    (_STANDARD_DEV,)
                                                   )
                             ])
-_mnist_training = datasets.MNIST(root = './data', 
+_mnist_training = datasets.MNIST(root = './src/data', 
                                  train = True, 
                                  download = True,
                                  transform = _transf
                                 )
-_mnist_holdout = datasets.MNIST(root = './data', 
+_mnist_holdout = datasets.MNIST(root = './src/data', 
                                 train = False, 
                                 download = False,
                                 transform = _transf
