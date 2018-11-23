@@ -1,39 +1,27 @@
-"""
-1. Download the MNIST data (both the training and the holdout) from torchvision.
-2. Standardize the scale of all features.
-3. Create 500-sized batches for fast processing.
-4. Make training_batches and holdout_batches available as public API.
-"""
-from torchvision import datasets, transforms
+import gensim.downloader as api
 import torch as t
 
+fasttext = api.load("fasttext-wiki-news-subwords-300")  
+
+_newsgp_training = 0
+_newsgp_holdout = 0
+
 ## private attributes
-_BATCH_SIZE = 500
-_MEAN = 0.1307
-_STANDARD_DEV = 0.3081
-_transf = transforms.Compose([transforms.ToTensor(), 
-                              transforms.Normalize((_MEAN,), 
-                                                   (_STANDARD_DEV,)
-                                                  )
-                            ])
-_mnist_training = datasets.MNIST(root = './src/data', 
-                                 train = True, 
-                                 download = True,
-                                 transform = _transf
-                                )
-_mnist_holdout = datasets.MNIST(root = './src/data', 
-                                train = False, 
-                                download = False,
-                                transform = _transf
-                               )
+_BATCH_SIZE = 100
+_MEAN = 0
+_STANDARD_DEV = 1
 
 
-## API                                
-training_batches = t.utils.data.DataLoader(dataset = _mnist_training,
+
+## API          
+# train_image_zero, train_target_zero = _mnist_training[0]
+
+# print(_newsgp_training.data[-1:][0])                      
+training_batches = t.utils.data.DataLoader(dataset = _newsgp_training,
                                            batch_size = _BATCH_SIZE, 
                                            shuffle = True
                                           )
-holdout_batches = t.utils.data.DataLoader(dataset = _mnist_holdout,
+holdout_batches = t.utils.data.DataLoader(dataset = _newsgp_holdout,
                                           batch_size = _BATCH_SIZE, 
                                           shuffle = True
                                          )
