@@ -12,7 +12,7 @@ Hyperparameters:
 from models import ConvNet
 from train import fit
 from validate import Accuracy
-from data import training_batches, holdout_batches
+from util import mk_dataloader
 from torch.nn import CrossEntropyLoss
 import torch as t
 
