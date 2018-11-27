@@ -12,11 +12,11 @@ Hyperparameters:
 from models import ConvNet
 from train import fit
 from validate import Accuracy
-from util import mk_dataloader
+from data.util import *
 from torch.nn import CrossEntropyLoss
 import torch as t
 
-## make a convnet object configured to hyperparameters
+## 1. make a convnet object configured to hyperparameters
 KERNEL_SIZE = 3
 convnet = ConvNet(input_dim = 28,
                   kernel_size = KERNEL_SIZE,
@@ -24,7 +24,7 @@ convnet = ConvNet(input_dim = 28,
                   padding = int((KERNEL_SIZE - 1) / 2)
                )
 
-## fit model
+## 2. fit model
 fit(model = convnet, 
     training = training_batches, 
     optimizer = t.optim.Adam(convnet.parameters(), 
@@ -34,6 +34,6 @@ fit(model = convnet,
     n_epochs = 2
    )
 
-## check accuracy
+## 3. check accuracy
 accuracy = Accuracy(convnet, holdout_batches)
 print(f'{accuracy}')   
