@@ -3,7 +3,6 @@ Fetch data from 20newsgroups in sklearn.datasets with these key attributes: "dat
 Keep only texts with no more than 1000 tokens. Embed into 300D GloVe.
 """
 from sklearn.datasets import fetch_20newsgroups
-from sklearn.model_selection import train_test_split
 from numpy import zeros
 from spacy import load
 

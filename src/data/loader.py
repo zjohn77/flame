@@ -1,34 +1,30 @@
 """
 Build DataLoader objects starting from the raw text.
 """
-import numpy as np
-from torch import tensor, arange, double
-from util import fetch_data, doc2matrix, standardize_dataset, mk_dataloader
-from torch.utils.data import TensorDataset, DataLoader
 from scipy.stats import zscore
+# from sklearn.model_selection import train_test_split
 from torch import from_numpy
+from torch.utils.data import TensorDataset, DataLoader
 
-def standardize_dataset(X, y):
-   '''Build a TensorDataset object--basically a tuple holding 2 tensors 
-   (1 design matrix + 1 response vector)--by standardizing features and then 
-   converting from arrays to tensors. 
+# def strat_split(X, y):
+#    X_trn, X_vld, y_trn, y_vld = train_test_split(X, y,
+#                                                  stratify = y, 
+#                                                  test_size = .5
+#                                                 )
+#    return X_trn, X_vld, y_trn, y_vld
+
+def standardize_dataset(X, y: 'numpy arrays'):
+   '''Wrap X, y into a TensorDataset object having the attribute TensorDataset.tensors,
+   which is a tuple holding 2 tensors (predictors + response).
    '''
-   tensor_X = from_numpy(zscore(X))
-   tensor_y = from_numpy(y)
-   return TensorDataset(tensor_X, tensor_y)
+   return TensorDataset(from_numpy(zscore(X)), 
+                        from_numpy(y)
+                       )
 
-def sample_split(X, y):
-   X_train, X_test, y_train, y_test = train_test_split(X, y,
-                                                    stratify = y, 
-                                                    test_size = 0.5)
-
-def mk_dataloader(dataset):
+def mk_dataloader(dataset: 'TensorDataset object'):
    '''Make a DataLoader object--bundling a dataset with its configurations.
    ''' 
    return DataLoader(dataset = dataset,
-                     batch_size = 100, 
-                     shuffle = True
+                     batch_size = 100,
+                     shuffle = False
                     )
-
-# training_batches = mk_dataloader()
-# holdout_batches = mk_dataloader()
