@@ -2,12 +2,10 @@
 Fetch data from 20newsgroups in sklearn.datasets with these key attributes: "data", "target".
 Keep only texts with no more than 1000 tokens. Embed into 300D GloVe.
 """
-from sklearn.datasets import fetch_20newsgroups
 from numpy import zeros
 from spacy import load
 
-NEWSGROUPS = fetch_20newsgroups(subset='test')
-PRETRAINED_GLOVE = load('en_vectors_web_lg') ## Set an embedder that takes a text arg & embeds it.
+__PRETRAINED_GLOVE = load('en_vectors_web_lg') ## Set an embedder that takes a text arg & embeds it.
 
 class TextData:
    def __init__(self, data, target):
@@ -21,7 +19,7 @@ class TextData:
       Stack the embedded numeric document matrices into a numpy tensor (i.e. our predictors).
       '''        
       for i, doc in enumerate(self.__data):
-         words = PRETRAINED_GLOVE(doc)
+         words = __PRETRAINED_GLOVE(doc)
          J = min(len(words), self.__MAXLEN)
          for j in range(J):
             self.__embedding[i, j] = words[j].vector
@@ -29,7 +27,7 @@ class TextData:
    def getter(self):
       return self.__data, self.__target, self.__embedding
 
-if __name__ == '__main__':
-   textdata = TextData(NEWSGROUPS.data, NEWSGROUPS.target)
-   textdata.embed()
-   data, target, embedding = textdata.getter()   
+# if __name__ == '__main__':
+#    textdata = TextData(__NEWSGROUPS.data, __NEWSGROUPS.target)
+#    textdata.embed()
+#    data, target, embedding = textdata.getter()   

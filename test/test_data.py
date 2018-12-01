@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from torch import tensor, arange, double
+from torch import tensor, arange
 
 ## prepend the parent directory of this file to path
 import sys

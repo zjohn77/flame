@@ -1,20 +1,25 @@
-from .embed import *
-from .loader import *
+from .embed import TextData
+from .loader import standardize_dataset, mk_dataloader
 from sklearn.model_selection import train_test_split
+from sklearn.datasets import fetch_20newsgroups
 
-textdata = TextData(NEWSGROUPS.data, NEWSGROUPS.target)
-textdata.embed()
-_, target, embedding = textdata.getter()   
+__NEWSGROUPS = fetch_20newsgroups(subset='test')
+__textdata = TextData(__NEWSGROUPS.data, __NEWSGROUPS.target)
+__textdata.embed()
+_, __target, __embedding = __textdata.getter()   
 
-embedding_trn, embedding_vld, target_trn, target_vld = train_test_split(embedding, 
-                                                                        target,
-                                                                        stratify = target, 
-                                                                        test_size = .5
-                                                                       )
+(__embedding_trn, __embedding_vld,
+ __target_trn, __target_vld) = train_test_split(__embedding, 
+                                                                                __target,
+                                                                                stratify = __target, 
+                                                                                test_size = .5
+                                                                               )
 
-training_batches = mk_dataloader(standardize_dataset(embedding_trn, 
-                                                     target_trn)
+
+### Public API:
+training_batches = mk_dataloader(standardize_dataset(__embedding_trn, 
+                                                     __target_trn)
                                 )
-validati_batches = mk_dataloader(standardize_dataset(embedding_vld, 
-                                                     target_vld)
+validati_batches = mk_dataloader(standardize_dataset(__embedding_vld, 
+                                                     __target_vld)
                                 )

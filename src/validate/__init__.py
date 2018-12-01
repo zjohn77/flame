@@ -1,1 +1,1 @@
-from .test import Accuracy
+from .validate import Accuracy
