@@ -5,11 +5,11 @@ Keep only texts with no more than 1000 tokens. Embed into 300D GloVe.
 from numpy import zeros
 from spacy import load
 
-__PRETRAINED_GLOVE = load('en_vectors_web_lg') ## Set an embedder that takes a text arg & embeds it.
+PRETRAINED_GLOVE = load('en_vectors_web_lg') ## Set an embedder that takes a text arg & embeds it.
 
 class TextData:
    def __init__(self, data, target):
-      self.__MAXLEN = 20
+      self.__MAXLEN = 28
       self.__data = data
       self.__target = target
       self.__embedding = zeros((len(data), self.__MAXLEN, 300))
@@ -19,7 +19,7 @@ class TextData:
       Stack the embedded numeric document matrices into a numpy tensor (i.e. our predictors).
       '''        
       for i, doc in enumerate(self.__data):
-         words = __PRETRAINED_GLOVE(doc)
+         words = PRETRAINED_GLOVE(doc)
          J = min(len(words), self.__MAXLEN)
          for j in range(J):
             self.__embedding[i, j] = words[j].vector

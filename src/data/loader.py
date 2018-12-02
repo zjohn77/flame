@@ -17,14 +17,21 @@ def standardize_dataset(X, y: 'numpy arrays'):
    '''Wrap X, y into a TensorDataset object having the attribute TensorDataset.tensors,
    which is a tuple holding 2 tensors (predictors + response).
    '''
-   return TensorDataset(from_numpy(zscore(X)), 
-                        from_numpy(y)
+   Z = zscore(X)
+   Ztensor = from_numpy(Z)
+   return TensorDataset(Ztensor.permute(0, 2, 1).float(), 
+                        from_numpy(y).long()
                        )
 
 def mk_dataloader(dataset: 'TensorDataset object'):
    '''Make a DataLoader object--bundling a dataset with its configurations.
    ''' 
+#    print(dataset.tensors[0].shape)
+#    print(dataset.tensors[1].shape)
+#    torch.Size([3766, 300, 25])
+#    torch.Size([3766])
+
    return DataLoader(dataset = dataset,
-                     batch_size = 100,
+                     batch_size = 75,
                      shuffle = False
                     )
