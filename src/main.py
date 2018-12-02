@@ -18,7 +18,7 @@ import torch.optim as optim
 
 ## 1. make a convnet object configured to hyperparameters
 KERNEL_SIZE = 3
-convnet = ConvNet(input_height = 28,
+convnet = ConvNet(input_height = 800,
                   kernel_size = KERNEL_SIZE,
                   stride = 1,
                   padding = int((KERNEL_SIZE - 1) / 2)

@@ -40,19 +40,19 @@ class ConvNet(Module):
         ## 2. Define FC input dimension
         def n_extracted_features(conv_layers, input_height, last_out_channel):
             N_LAYERS = len(conv_layers) / 3
-            POOLED_DIM = input_height / 2**N_LAYERS
-            return int(last_out_channel * POOLED_DIM)
+            POOLED_DIM = input_height / 2**N_LAYERS  ##! check that evenly divides
+            return int(last_out_channel * POOLED_DIM)   
 
         ## 3. Specify FC network
         self.N_EXTRACTED_FEATURES = n_extracted_features(self.conv_layers, input_height, 16)
         self.fc_layers = Sequential(
-            Linear(self.N_EXTRACTED_FEATURES, 9),
+                                    Linear(self.N_EXTRACTED_FEATURES, 9),
                                     # Linear(16*7, 9),
                                     Linear(9, 20)
                                    )
 
     def forward(self, _input):
-        '''1. Extract features by convolving raw pixel into (7 by 7 by 32) feature tensors.
+        '''1. Extract features by convolving raw tensor into features.
            2. Flatten the tensor; then feed into fully connected layers.
         '''
         print(self.conv_layers(_input).shape)

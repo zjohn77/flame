@@ -9,7 +9,7 @@ PRETRAINED_GLOVE = load('en_vectors_web_lg') ## Set an embedder that takes a tex
 
 class TextData:
    def __init__(self, data, target):
-      self.__MAXLEN = 28
+      self.__MAXLEN = 800
       self.__data = data
       self.__target = target
       self.__embedding = zeros((len(data), self.__MAXLEN, 300))
@@ -25,9 +25,4 @@ class TextData:
             self.__embedding[i, j] = words[j].vector
 
    def getter(self):
-      return self.__data, self.__target, self.__embedding
-
-# if __name__ == '__main__':
-#    textdata = TextData(__NEWSGROUPS.data, __NEWSGROUPS.target)
-#    textdata.embed()
-#    data, target, embedding = textdata.getter()   
+      return self.__data, self.__target, self.__embedding  

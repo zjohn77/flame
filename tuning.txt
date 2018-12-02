@@ -1,0 +1,2 @@
+20 input dim    --- The out-of-sample accuracy of the ConvNet: 12.400424853956453%
+
