@@ -1,2 +1,8 @@
-20 input dim    --- The out-of-sample accuracy of the ConvNet: 12.400424853956453%
-
+                              out-of-sample accuracy
+2 epochs, 20 input dim    --- 12.400424853956453%
+2 epochs, 800 input dim    --- 7.5%
+20 epochs, 800 input dim    --- 17.25%
+20 epochs, 800 input dim, 100 nodes in hidden layer --- 18.5%
+20 epochs, 800 input dim, 100 nodes in hidden layer, increased # of filters
+from 16 to 64 --- 19.0%
+20 epochs, 800 input dim, 100 nodes in hidden layer, filters become 8->16->64 --- 25.75%

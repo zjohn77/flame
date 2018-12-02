@@ -32,8 +32,18 @@ class ConvNet(Module):
                                              padding
                                             ),
                                       ReLU(),
-                                      MaxPool1d(2)
+                                      MaxPool1d(2),
                                       ## layer 2
+                                      
+                                      Conv1d(16, 
+                                             64, 
+                                             kernel_size,
+                                             stride, 
+                                             padding
+                                            ),
+                                      ReLU(),
+                                      MaxPool1d(2)
+                                      ## layer 3
                                      )
         self.dropout = Dropout()
         
@@ -44,11 +54,10 @@ class ConvNet(Module):
             return int(last_out_channel * POOLED_DIM)   
 
         ## 3. Specify FC network
-        self.N_EXTRACTED_FEATURES = n_extracted_features(self.conv_layers, input_height, 16)
+        self.N_EXTRACTED_FEATURES = n_extracted_features(self.conv_layers, input_height, 64)
         self.fc_layers = Sequential(
-                                    Linear(self.N_EXTRACTED_FEATURES, 9),
-                                    # Linear(16*7, 9),
-                                    Linear(9, 20)
+                                    Linear(self.N_EXTRACTED_FEATURES, 100),
+                                    Linear(100, 20)
                                    )
 
     def forward(self, _input):
@@ -58,7 +67,6 @@ class ConvNet(Module):
         print(self.conv_layers(_input).shape)
         
         _output = (self.conv_layers(_input)
-                    #    .reshape(75, 16*7)
                        .reshape(-1, self.N_EXTRACTED_FEATURES)
                   )
         _output = self.dropout(_output)

@@ -31,7 +31,7 @@ fit(model = convnet,
                            lr = 0.001   ## lr: the learn rate
                           ),
     loss_func = CrossEntropyLoss(),
-    n_epochs = 2
+    n_epochs = 20
    )
 
 ## 3. check accuracy

@@ -14,8 +14,8 @@ _, __target, __embedding = __textdata.getter()
 (__embedding_trn, __embedding_vld,
  __target_trn, __target_vld) = train_test_split(__embedding, 
                                                 __target,
-                                                train_size = 1000,
-                                                test_size = 500,
+                                                train_size = 700,
+                                                test_size = 400,
                                                 stratify = __target,
                                                 random_state = 999
                                                )
