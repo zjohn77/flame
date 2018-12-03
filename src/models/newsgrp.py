@@ -7,7 +7,7 @@ class ConvNet(Module):
     '''Define network structure in the constructor; then specify the logic of the forward pass 
     in a method called forward.
     '''
-    def __init__(self, input_height, kernel_size, stride, padding):
+    def __init__(self, input_height, kernel_size, stride, padding, hidden_layer_nodes):
         '''1. Convolve the single channel tensor into 8 and 16 channels respectively.
            2. Define how the amount of downsampling, spatial size of input, etc, map into the FC input dimension.
            3. Specify FC network with a hidden layer of width 10.
@@ -52,14 +52,13 @@ class ConvNet(Module):
             N_LAYERS = len(conv_layers) / 3
             if input_height % 2**N_LAYERS != 0:
                 raise Exception('input_height should evenly divide 2**N_LAYERS.')
-            POOLED_DIM = input_height / 2**N_LAYERS  ##! check that 
+            POOLED_DIM = input_height / 2**N_LAYERS
             return int(last_out_channel * POOLED_DIM)   
 
         ## 3. Specify FC network
         self.N_EXTRACTED_FEATURES = n_extracted_features(self.conv_layers, input_height, 64)
-        self.fc_layers = Sequential(
-                                    Linear(self.N_EXTRACTED_FEATURES, 100),
-                                    Linear(100, 20)
+        self.fc_layers = Sequential(Linear(self.N_EXTRACTED_FEATURES, hidden_layer_nodes),
+                                    Linear(hidden_layer_nodes, 20)
                                    )
 
     def forward(self, _input):
