@@ -18,7 +18,7 @@ class ConvNet(Module):
         self.conv_layers = Sequential(Conv1d(300, 
                                              8, 
                                              kernel_size, 
-                                             stride, 
+                                             stride,
                                              padding
                                             ),
                                       ReLU(),
@@ -50,7 +50,9 @@ class ConvNet(Module):
         ## 2. Define FC input dimension
         def n_extracted_features(conv_layers, input_height, last_out_channel):
             N_LAYERS = len(conv_layers) / 3
-            POOLED_DIM = input_height / 2**N_LAYERS  ##! check that evenly divides
+            if input_height % 2**N_LAYERS != 0:
+                raise Exception('input_height should evenly divide 2**N_LAYERS.')
+            POOLED_DIM = input_height / 2**N_LAYERS  ##! check that 
             return int(last_out_channel * POOLED_DIM)   
 
         ## 3. Specify FC network

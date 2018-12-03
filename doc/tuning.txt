@@ -6,3 +6,5 @@
 20 epochs, 800 input dim, 100 nodes in hidden layer, increased # of filters
 from 16 to 64 --- 19.0%
 20 epochs, 800 input dim, 100 nodes in hidden layer, filters become 8->16->64 --- 25.75%
+"" + sample size=1000 --- 28.19%
+"" + sample size=2000 --- 45.1%
