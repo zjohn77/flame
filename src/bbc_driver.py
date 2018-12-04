@@ -14,10 +14,25 @@ from data import data_pipeline
 from models.newsgrp import ConvNet
 from train import train_model
 from yaml import load
+from os.path import abspath
+from pathlib import Path
+
+def __navigate(locator):
+   '''navigate to the dir holding the files'''
+   root = abspath(__file__)
+   return Path(root).parent / locator
+
+def __files2list(files):
+   '''read files, append to list'''
+   return [file.read_text(encoding='ISO-8859-1') for file in files]
+
+folders = __navigate('bbc').iterdir()
+d = {folder.stem: __files2list(folder.iterdir()) for folder in folders}
+
+
 
 CONFIG = load(open('config.yaml'))['newsgrp']
 NEWSGROUPS = fetch_20newsgroups(subset='all')
-
 training_batches, validati_batches = data_pipeline(NEWSGROUPS.data, 
                                                    NEWSGROUPS.target
                                                   )
