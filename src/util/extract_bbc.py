@@ -1,11 +1,11 @@
-from os.path import abspath
+# from os.path import abspath
 from pathlib import Path
 
 def __navigate(locator):
    '''Navigate to the dir holding the files via relative path fashion, starting from __file__. 
    '''
-   root = abspath(__file__)
-   return Path(root).parent.parent / locator
+   # root = abspath(__file__)
+   return Path(__file__).parent.parent / locator
 
 def __files2list(files):
    '''Iterates over a files generator. Reads each file as a string. And then append to list.

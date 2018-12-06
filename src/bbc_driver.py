@@ -8,13 +8,13 @@ from data import data_pipeline
 from models.newsgrp import ConvNet
 from train import train_model
 from yaml import load
-from util import extract_data
+from util import bbc_data_pipeline
 
 CONFIG = load(open('config.yaml'))['newsgrp']
-BBC = extract_data('data/bbc')
 
-training_batches, validati_batches = data_pipeline(NEWSGROUPS.data, 
-                                                   NEWSGROUPS.target
+data, target = bbc_data_pipeline()
+training_batches, validati_batches = data_pipeline(data, 
+                                                   target
                                                   )
 model = train_model(training_batches,
                     validati_batches,
