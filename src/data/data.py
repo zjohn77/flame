@@ -6,8 +6,8 @@ def data_pipeline(data, target: 'lists of texts'):
    (data_trn, data_vld,
    target_trn, target_vld) = train_test_split(data, 
                                               target,
-                                              train_size = 2000,
-                                              test_size = 1000,
+                                              train_size = .75,
+                                              test_size = .25,
                                               stratify = target,
                                               random_state = 999
                                              )

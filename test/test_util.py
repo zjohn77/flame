@@ -14,8 +14,12 @@ class Util(TestCase):
         cls.data = {'arts': [4],
                     'tech': [6, 9]
                    }
+        cls.extracted_data = extract_data('data/bbc')
+    
+    def test_extract_data(self):
+        self.assertTrue(len(Util.extracted_data) == 5)
 
     def test_reshape(self):
-      self.assertEqual(reshape(Util.data),
-                       ([4, 6, 9], [0, 1, 1])
-                      )
+        self.assertEqual(reshape(Util.data),
+                         ([4, 6, 9], [0, 1, 1])
+                        )
