@@ -10,10 +10,11 @@ Hyperparameters:
    * n_epochs = 20.
 """
 from sklearn.datasets import fetch_20newsgroups
-from data import data_pipeline
-from models.newsgrp import ConvNet
-from train import train_model
+
 from yaml import load
+from data import data_pipeline
+from train import train_model
+from models.newsgrp import ConvNet
 
 CONFIG = load(open('config.yaml'))['newsgrp']
 NEWSGROUPS = fetch_20newsgroups(subset='all')

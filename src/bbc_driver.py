@@ -1,15 +1,16 @@
 """
-Set hyperparameters; then, fit a ConvNet to training sample; finally, output its accuracy on holdout sample.
+fit a ConvNet to training sample; finally, output its accuracy on holdout sample.
 Hyperparameters: 
-   * padding--constrained to fix spatial size during convolution,
+   * padding--constrained to fix spatial size during convolution
 """
-from sklearn.datasets import fetch_20newsgroups
-from data import data_pipeline
-from models.newsgrp import ConvNet
-from train import train_model
-from yaml import load
 from util import bbc_data_pipeline
 
+from yaml import load
+from data import data_pipeline
+from train import train_model
+from models.newsgrp import ConvNet
+
+## Set the dict CONFIG to the hyperparameters loaded from the newsgrp section of "config.yaml".
 CONFIG = load(open('config.yaml'))['newsgrp']
 
 data, target = bbc_data_pipeline()
