@@ -2,15 +2,17 @@
 Fit a ConvNet to training sample and output its accuracy on holdout sample.
 """
 from yaml import load
-from data import data_pipeline
-from train import train_model
-from models.newsgrp import ConvNet
+from .data import data_pipeline
+from .train import train_model
+from .models.newsgrp import ConvNet
 
-def build_model(): 
+def build_model(data, target):
+   '''API that takes raw data in lists and returns a pytorch model object.
+   '''
    ## Set the dict CONFIG to the hyperparameters loaded from the newsgrp section of "config.yaml".
    CONFIG = load(open('config.yaml'))['newsgrp']
 
-   ## Training, validation split; Batch data as specified in loader.py to reducing RAM use.
+   ## Shape data into pytorch Datasets (batch data according to loader.py to reducing RAM use).
    training_batches, validati_batches = data_pipeline(data, 
                                                       target
                                                      )
