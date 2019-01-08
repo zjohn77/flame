@@ -1,9 +1,9 @@
 from pathlib import Path
 
 def __navigate(locator):
-   '''Navigate to the dir holding the files via relative path fashion, starting from __file__. 
+   '''Chg dir by going up starting from __file__ and then go down the "locator" path.
    '''
-   return Path(__file__).resolve().parents[2] / locator
+   return Path(__file__).resolve().parents[0] / locator
 
 def __files2list(files):
    '''Iterates over a files generator. Reads each file as a string. And then append to list.
