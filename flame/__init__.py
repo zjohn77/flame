@@ -6,7 +6,7 @@ from .data import data_pipeline
 from .train import train_model
 from .models.newsgrp import ConvNet
 
-def build_model(data, target):
+def main(data, target):
    '''API that takes raw data in lists and returns a pytorch model object.
    '''
    ## Set the dict CONFIG to the hyperparameters loaded from the newsgrp section of "config.yaml".
