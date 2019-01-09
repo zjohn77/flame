@@ -2,8 +2,8 @@
 Fit a ConvNet to training sample and output its accuracy on holdout sample.
 """
 from .data import data_pipeline
+from .models.news import ConvNet
 from .train import train_model
-from .models.newsgrp import ConvNet
 
 def main(data, target, config):
    '''API that takes raw data in lists and returns a pytorch model object.
@@ -15,7 +15,7 @@ def main(data, target, config):
    ## Call generic train_model wrapper with the ConvNet model type.                                                   
    model = train_model(training_batches,
                        validati_batches,
-                       ConvNet(input_height = 800,
+                       ConvNet(input_length = 200,
                                kernel_size = config['kernel_size'],
                                stride = config['stride'],
                                padding = int((config['kernel_size'] - 1) / 2),   # constrained to fix spatial size during convolution

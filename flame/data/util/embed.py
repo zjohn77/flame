@@ -9,10 +9,12 @@ PRETRAINED_GLOVE = load('en_vectors_web_lg') ## Set an embedder that takes a tex
 
 class TextData:
    def __init__(self, data, target):
-      self.__MAXLEN = 800
+      self.__MAXLEN = 200
       self.__data = data
       self.__target = target
       self.__embedding = zeros((len(data), self.__MAXLEN, 300))
+      # The self.__embedding prefills each tensor with 0's to ensure that all are the
+      # same size regardless of text lengths. 
    
    def embed(self):   
       '''Chunk each document into words and then embed those words into 300D GloVe vectors.
@@ -25,4 +27,4 @@ class TextData:
             self.__embedding[i, j] = words[j].vector
 
    def getter(self):
-      return self.__data, self.__target, self.__embedding  
+      return self.__data, self.__target, self.__embedding

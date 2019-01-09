@@ -28,6 +28,6 @@ def mk_dataloader(dataset: 'TensorDataset object'):
 #    torch.Size([3766, 300, 25])
 
    return DataLoader(dataset = dataset,
-                     batch_size = 100,
+                     batch_size = 50,
                      shuffle = False
                     )

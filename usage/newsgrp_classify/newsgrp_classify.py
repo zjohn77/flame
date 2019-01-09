@@ -13,7 +13,7 @@ from flame import main
 from sklearn.datasets import fetch_20newsgroups
 from yaml import load
 
-NEWSGROUPS = fetch_20newsgroups(subset='train')
+NEWSGROUPS = fetch_20newsgroups(subset='test')
 CONFIG_FILE = module_path / 'usage' / 'config.yaml'
 CONFIG_SECTION = 'newsgrp'
 
