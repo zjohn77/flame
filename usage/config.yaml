@@ -10,4 +10,4 @@ newsgrp:
     stride: 1
     learn_rate: 0.001
     n_epochs: 40
-    hidden_layer_nodes: 100
+    hidden_layer_nodes: 50

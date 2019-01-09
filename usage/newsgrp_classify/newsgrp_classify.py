@@ -1,35 +1,27 @@
 """
-Set hyperparameters; then, fit a ConvNet to training sample; finally, output its accuracy on holdout sample.
-Hyperparameters: 
-   * KERNEL_SIZE = 3, 
-   * stride = 1, 
-   * padding--constrained to fix spatial size during convolution,
-   * optimizer = Adam, 
-   * learn rate = 0.001, 
-   * loss_func = CrossEntropyLoss(),
-   * n_epochs = 20.
+Entire model building process:
+   1. train model: deep learn on training cases; evaluate OOS prediction accuracy.
+   2. return the trained model object for further analysis.
 """
+## import the function to build a model
+import sys
+from pathlib import Path
+module_path = Path(__file__).resolve().parents[2] # cd ../..
+sys.path.insert(0, str(module_path))
+from flame import main
+
 from sklearn.datasets import fetch_20newsgroups
-
 from yaml import load
-from data import data_pipeline
-from train import train_model
-from models.newsgrp import ConvNet
 
-CONFIG = load(open('config.yaml'))['newsgrp']
-NEWSGROUPS = fetch_20newsgroups(subset='all')
+NEWSGROUPS = fetch_20newsgroups(subset='train')
+CONFIG_FILE = module_path / 'usage' / 'config.yaml'
+CONFIG_SECTION = 'newsgrp'
 
-training_batches, validati_batches = data_pipeline(NEWSGROUPS.data, 
-                                                   NEWSGROUPS.target
-                                                  )
-model = train_model(training_batches,
-                    validati_batches,
-                    ConvNet(input_height = 800,
-                            kernel_size = CONFIG['kernel_size'],
-                            stride = CONFIG['stride'],
-                            padding = int((CONFIG['kernel_size'] - 1) / 2),
-                            hidden_layer_nodes = CONFIG['hidden_layer_nodes']
-                           ),
-                    CONFIG['learn_rate'],
-                    CONFIG['n_epochs']
-                   )
+def build_model():
+   '''main function'''
+   return main(NEWSGROUPS.data, NEWSGROUPS.target, 
+               load(open(CONFIG_FILE))[CONFIG_SECTION] # Load hyperparameters from the newsgrp section 
+                                                       # of "config.yaml".
+              )
+
+build_model()
