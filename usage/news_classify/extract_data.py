@@ -1,3 +1,6 @@
+"""
+Handle input: read all files into a dict by pointing extract_data to the data location.
+"""
 from pathlib import Path
 
 def __navigate(locator):
