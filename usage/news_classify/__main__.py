@@ -29,5 +29,4 @@ def build_model():
                                                  # of "config.yaml".
               )
 
-# if __name__ == '__main__':
-build_model()
+model = build_model()

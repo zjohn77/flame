@@ -1,11 +1,11 @@
 reusable pytorch convnet nlp
 
-```python
+```sh
 cd usage
 python news_classify
 ```
 
-```python
+```sh
 cd test
 python -m unittest discover
 ```

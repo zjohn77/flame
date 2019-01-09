@@ -8,7 +8,6 @@ class Accuracy:
    to accumulate the # of correct predictions, and then dividing by sample size.
    '''
    def __init__(self, model, holdout):
-#       self.model = model
       self.holdout = holdout
       with no_grad():
          self.correct_tally = 0
