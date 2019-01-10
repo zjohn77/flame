@@ -1,11 +1,13 @@
 """
-Use the trained model to predict holdout classes; then compute the % of the holdout that were correctly classified.
+Use the trained model to predict holdout classes; 
+then compute the % of the holdout that were correctly classified.
 """
 from torch import no_grad, max
 
 class Accuracy:
-   '''Generate the model's holdout accuracy rate--by first looping over each holdout batch
-   to accumulate the # of correct predictions, and then dividing by sample size.
+   '''Generate the model's holdout accuracy rate--by first looping over 
+   each holdout batch to accumulate the # of correct predictions, 
+   and then dividing by sample size.
    '''
    def __init__(self, model, holdout):
       self.holdout = holdout

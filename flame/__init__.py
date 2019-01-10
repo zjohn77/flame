@@ -2,7 +2,7 @@
 Fit a ConvNet to training sample and output its accuracy on holdout sample.
 """
 from .data import data_pipeline
-from .models.news import ConvNet
+from .models.news import ConvNet    # .news customizable to another model
 from .train import train_model
 
 def main(data, target, config):

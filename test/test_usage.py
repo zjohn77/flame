@@ -1,5 +1,5 @@
 """
-Test usage module's functions: extract_data, reshape. 
+Test the usage module's functions: extract_data, reshape. 
 """
 from unittest import TestCase
 
@@ -7,9 +7,6 @@ from pathlib import Path
 import sys
 module_path = Path(__file__).resolve().parents[1] ## cd ..
 sys.path.insert(0, str(module_path))
-
-# from usage.news_classify.extract_data import *
-# from usage.news_classify.transform_data import *
 from usage.news_classify import *
 
 class Usage(TestCase):
