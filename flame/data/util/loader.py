@@ -24,9 +24,6 @@ def standardize_dataset(X, y: 'numpy arrays'):
 def mk_dataloader(dataset: 'TensorDataset object'):
    '''Make a DataLoader object--bundling a dataset with its configurations.
    ''' 
-#    print(dataset.tensors[0].shape)
-#    torch.Size([3766, 300, 25])
-
    return DataLoader(dataset = dataset,
                      batch_size = 50,
                      shuffle = False
