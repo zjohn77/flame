@@ -19,36 +19,37 @@ class ConvNet(Module):
 		super().__init__()
 		
 		## 1. Convolve the tensor using 2 convolutional layers
-		self.conv_layers = Sequential(Conv1d(300, # 1 channel for each dimension of word embedding
-														 8, 
-														 kernel_size, 
-														 stride,
-														 padding
-														),
-												ReLU(),
-												MaxPool1d(2),
-												## layer 1
+		self.conv_layers = Sequential(
+         # The 1st Layer:
+         Conv1d(300, # 1 channel for each dimension of word embedding
+                  8, 
+                  kernel_size, 
+                  stride,
+                  padding
+               ),
+         ReLU(),
+         MaxPool1d(2),
 
-												Conv1d(8, 
-														 16, 
-														 kernel_size,
-														 stride, 
-														 padding
-														),
-												ReLU(),
-												MaxPool1d(2),
-												## layer 2
-												
-												Conv1d(16, 
-														 64, 
-														 kernel_size,
-														 stride, 
-														 padding
-														),
-												ReLU(),
-												MaxPool1d(2)
-												## layer 3
-												)
+         # The 2nd Layer:
+         Conv1d(8, 
+                  16, 
+                  kernel_size,
+                  stride, 
+                  padding
+               ),
+         ReLU(),
+         MaxPool1d(2),
+         
+         # The 3rd Layer:
+         Conv1d(16, 
+                  64, 
+                  kernel_size,
+                  stride, 
+                  padding
+               ),
+         ReLU(),
+         MaxPool1d(2)
+      )
 		self.dropout = Dropout()
 		
 		## 2. Define fully connected input dimension
