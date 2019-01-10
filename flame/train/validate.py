@@ -1,6 +1,6 @@
 """
 Use the trained model to predict holdout classes; 
-then compute the % of the holdout that were correctly classified.
+then compute the % of the holdout being correctly classified.
 """
 from torch import no_grad, max
 

@@ -18,7 +18,7 @@ def main(data, target, config):
                        ConvNet(input_length = 200,
                                kernel_size = config['kernel_size'],
                                stride = config['stride'],
-                               padding = int((config['kernel_size'] - 1) / 2),   # constrained to fix spatial size during convolution
+                               padding = int((config['kernel_size'] - 1) / 2), # constrained to fix spatial size during convolution
                                hidden_layer_nodes = config['hidden_layer_nodes']
                                ),
                        config['learn_rate'],

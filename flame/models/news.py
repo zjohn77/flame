@@ -53,7 +53,8 @@ class ConvNet(Module):
 		
 		## 2. Define fully connected input dimension
 		def n_extracted_features(conv_layers, input_length, last_out_channel):
-			'''Use the arguments to the numbers of nodes to feed into the FC layer.
+			'''Helper function for creating the attribute "self.N_EXTRACTED_FEATURES"
+         that computes the numbers of nodes to feed into the flat, fully connected layer.
 			'''
 			N_LAYERS = len(conv_layers) / 3
 			
@@ -63,15 +64,16 @@ class ConvNet(Module):
 			
 			POOLED_DIM = input_length / 2**N_LAYERS
 			
-			return int(last_out_channel * POOLED_DIM) 
+			return int(last_out_channel * POOLED_DIM)  # = the volume of the flattened tensor
+                                                    # being fed forward to the FC layer
 
 		## 3. Specify fully connected network using the above dimension calculations.
 		self.N_EXTRACTED_FEATURES = n_extracted_features(self.conv_layers, 
 																		 input_length, 
-																		 64
+																		 64   # must = last Conv1d's out channels
 																		)
 		self.fc_layers = Sequential(Linear(self.N_EXTRACTED_FEATURES, hidden_layer_nodes),
-											 Linear(hidden_layer_nodes, 20)
+											 Linear(hidden_layer_nodes, 20)   # there are 20 newsgroups
 											)
 
 	def forward(self, _input):
@@ -80,7 +82,7 @@ class ConvNet(Module):
 		'''
 		_output = (self.conv_layers(_input)
 							.reshape(-1, self.N_EXTRACTED_FEATURES)
-					)
+					 )
 		_output = self.dropout(_output)
 		
 		return self.fc_layers(_output)
