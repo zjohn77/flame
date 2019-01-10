@@ -11,7 +11,7 @@ sys.path.insert(0, str(module_path))
 from flame import main
 
 from sklearn.datasets import fetch_20newsgroups
-from yaml import load
+from yaml import safe_load
 
 NEWSGROUPS = fetch_20newsgroups(subset='test')
 CONFIG_FILE = module_path / 'usage' / 'config.yaml'
@@ -20,7 +20,7 @@ CONFIG_SECTION = 'newsgrp'
 def build_model():
    '''main function'''
    return main(NEWSGROUPS.data, NEWSGROUPS.target, 
-               load(open(CONFIG_FILE))[CONFIG_SECTION] # Load hyperparameters from the newsgrp section 
+               safe_load(open(CONFIG_FILE))[CONFIG_SECTION] # Load hyperparameters from the newsgrp section 
                                                        # of "config.yaml".
               )
 

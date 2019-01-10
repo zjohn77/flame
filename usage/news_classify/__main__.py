@@ -15,7 +15,7 @@ from flame import main
 ## import the functions to handle data and config file
 from extract_data import extract_data
 from transform_data import reshape
-from yaml import load
+from yaml import safe_load
 
 DATAPATH = 'data/'
 CONFIG_FILE = module_path / 'usage' / 'config.yaml'
@@ -25,7 +25,7 @@ def build_model():
    '''main function'''
    data, target = reshape(extract_data(DATAPATH))
    return main(data, target, 
-               load(open(CONFIG_FILE))[CONFIG_SECTION] # Load hyperparameters from the news section 
+               safe_load(open(CONFIG_FILE))[CONFIG_SECTION] # Load hyperparameters from the news section 
                                                  # of "config.yaml".
               )
 

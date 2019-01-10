@@ -1,6 +1,7 @@
-spacy==2.0.13
-torch==0.4.1.post2
+setuptools==40.6.2
 scipy==1.1.0
 numpy==1.15.4
+torch==0.4.1.post2
+spacy==2.0.13
 scikit_learn==0.20.2
 PyYAML==3.13
