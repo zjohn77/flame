@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 module_path = Path(__file__).resolve().parents[2] # cd ../..
 sys.path.insert(0, str(module_path))
-from flame import main
+from inflame import main
 
 ## import the functions to handle data and config file
 from extract_data import extract_data

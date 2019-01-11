@@ -4,8 +4,7 @@ functionality that are defined in the util folder. It basically takes
 data and target, which are two lists of texts, embeds them in GloVe,
 and finally converts them to pytorch DataLoader objects.   
 """
-from .util.embed import TextData
-from .util.loader import standardize_dataset, mk_dataloader
+from .util import *
 from sklearn.model_selection import train_test_split
 
 def data_pipeline(data, target: 'lists of texts'):

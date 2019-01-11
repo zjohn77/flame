@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 module_path = Path(__file__).resolve().parents[2] # cd ../..
 sys.path.insert(0, str(module_path))
-from flame import main
+from inflame import main
 
 from sklearn.datasets import fetch_20newsgroups
 from yaml import safe_load
