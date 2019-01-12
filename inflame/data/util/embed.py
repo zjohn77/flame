@@ -3,9 +3,11 @@ Fetch data from 20newsgroups in sklearn.datasets with these key attributes: "dat
 Keep only texts with no more than 1000 tokens. Embed into 300D GloVe.
 """
 from numpy import zeros
-from spacy import load
+# from spacy import load
+# PRETRAINED_GLOVE = load('en_vectors_web_lg') ## Set an embedder that takes a text arg & embeds it.
+import en_core_web_sm
 
-PRETRAINED_GLOVE = load('en_vectors_web_lg') ## Set an embedder that takes a text arg & embeds it.
+PRETRAINED_GLOVE = en_core_web_sm.load()
 
 class TextData:
    def __init__(self, data, target):

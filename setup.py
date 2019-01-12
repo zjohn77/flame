@@ -5,7 +5,7 @@ with open("README.md") as f:
 
 setup(
    name="inflame",
-   version="0.1.3",
+   version="0.7.0",
    license='MIT',
    description="Deep learning applied to text classification, in PyTorch",
    long_description=long_description,
@@ -17,7 +17,16 @@ setup(
    classifiers=[
       "Programming Language :: Python :: 3",
       "License :: OSI Approved :: MIT License",
-      "Operating System :: OS Independent",
+      "Operating System :: POSIX :: Linux",
    ],
-   keywords='deep learning'
+   keywords='deep learning',
+   install_requires=[
+      'scipy>=1.1',
+      'numpy>=1.15',
+      'torch>=0.4',
+      'scikit_learn>=0.20',
+      'PyYAML>=3',
+      'spacy>=2.0',
+      'en-core-web-sm'
+   ]
 )
