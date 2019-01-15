@@ -16,6 +16,7 @@ def main(data, target, config):
    model = train_model(training_batches,
                        validati_batches,
                        ConvNet(input_length = 200,
+                               channels = 50,
                                kernel_size = config['kernel_size'],
                                stride = config['stride'],
                                padding = int((config['kernel_size'] - 1) / 2), # constrained to fix spatial size during convolution
