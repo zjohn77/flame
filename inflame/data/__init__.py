@@ -4,10 +4,12 @@ functionality that are defined in the util folder. It basically takes
 data and target, which are two lists of texts, embeds them in GloVe,
 and finally converts them to pytorch DataLoader objects.   
 """
-from .util import *
+from .util import NLP, standardize_dataset, mk_dataloader
 from sklearn.model_selection import train_test_split
 
 def data_pipeline(data, target: 'lists of texts'):
+   '''Do train/test split; then embed text into vectors; lastly create Dataloaders.'''
+   # Stratified sample the data and target into training and validation datasets.
    (data_trn, data_vld,
    target_trn, target_vld) = train_test_split(data, 
                                               target,
@@ -16,15 +18,12 @@ def data_pipeline(data, target: 'lists of texts'):
                                               stratify = target,
                                               random_state = 999
                                              )
-   textdata_trn = TextData(data_trn, target_trn)
-   textdata_vld = TextData(data_vld, target_vld)
 
-   textdata_trn.embed()
-   textdata_vld.embed()
+   # Embed data.
+   embedding_trn = NLP(data_trn).embed()
+   embedding_vld = NLP(data_vld).embed()
 
-   _, target_trn, embedding_trn = textdata_trn.getter()   
-   _, target_vld, embedding_vld = textdata_vld.getter()   
-
+   # Standardize numpy tensors and convert them to pytorch tensors.
    training_batches = mk_dataloader(standardize_dataset(embedding_trn, 
                                                         target_trn
                                                        )
@@ -33,4 +32,5 @@ def data_pipeline(data, target: 'lists of texts'):
                                                         target_vld
                                                        )
                                    )
+   
    return training_batches, validati_batches
