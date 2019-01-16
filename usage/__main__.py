@@ -5,20 +5,15 @@ sys.path.insert(0, str(module_path))
 from inflame import build_model
 from yaml import safe_load
 
-EXAMPLE_NAME = sys.argv[1]
 CONFIG_FILE = module_path / 'usage' / 'config.yaml'
+EXAMPLE = sys.argv[1]
+config = safe_load(open(CONFIG_FILE))[EXAMPLE] # Load hyperparameters from the news section 
 
-if EXAMPLE_NAME == 'news':
-   CONFIG_SECTION = 'news'
-   config = safe_load(open(CONFIG_FILE))[CONFIG_SECTION] # Load hyperparameters from the news section 
-   import news_classify
-   news_classify.runner(config)
-
-elif EXAMPLE_NAME == 'newsgrp':
-   CONFIG_SECTION = 'newsgrp'
-   config = safe_load(open(CONFIG_FILE))[CONFIG_SECTION] # Load hyperparameters from the news section 
-   import newsgrp_classify
-   newsgrp_classify.runner(config)
-   
+if EXAMPLE == 'news':
+   import news_classify as nc 
+   build_model(nc.data, nc.target, config)
+elif EXAMPLE == 'newsgrp':
+   import newsgrp_classify as ngc 
+   build_model(ngc.data, ngc.target, config)
 else:
    raise Exception('example not found')
