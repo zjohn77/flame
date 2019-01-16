@@ -13,13 +13,18 @@ def pipe(*args):
                 )
 
 class NLP:
+   '''Embeds a collection of texts into word vectors, thereby creating a tensor having
+   the dimensions specified in the method "_initialize". The document length dimension
+   of this tensor is fixed at __FIXED_DOCSIZE. The implications is that shorter 
+   documents are zero-padded and longer ones are truncated to 600 words.
+   '''
    def __init__(self, docs):
       self.__DOCS = docs
       self.__FIXED_DOCSIZE = 600
-      self.__WORD_VECS = load("glove-wiki-gigaword-50") ## Set an embedder that takes a text arg & embeds it.
+      self.__WORD_VECS = load("glove-wiki-gigaword-50") # Set an embedder that takes a text arg & embeds it.
 
    def _initialize(self):
-      '''Make a 3d tensor initialized to 0s.
+      '''Initialized a 3d tensor to 0s.
       '''
       dims = (len(self.__DOCS),   # number of docs
               self.__FIXED_DOCSIZE, 
@@ -47,7 +52,7 @@ class NLP:
       return list(words)[:self.__FIXED_DOCSIZE]
 
    def embed(self):
-      '''The GloVe embedding.
+      '''Returns a GloVe embedding tensor for the collection of documents.
       '''
       embedding = self._initialize()   # Prefills each tensor with 0's to ensure that all are the
                                        # same size regardless of text lengths.

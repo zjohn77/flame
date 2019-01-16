@@ -9,14 +9,13 @@ from torch.nn import Module, Sequential, Conv1d, ReLU, MaxPool1d, Dropout, Linea
 class ConvNet(Module):
 	'''Define network structure in the constructor; then specify the logic 
 	of the forward pass in a method called forward.
+   1. Convolve the tensor into 8 and then 16 channels respectively to extract "concepts".
+   2. Define how the amount of downsampling, spatial size of input, etc, 
+      map into the fully connected (FC) input dimension.
+   3. Specify fully connected network having 1 hidden layer with width=hidden_layer_nodes.
 	'''
 	def __init__(self, input_length, channels, kernel_size, stride, padding, 
-                hidden_layer_nodes, output_layer_nodes):
-		'''1. Convolve the tensor into 8 and then 16 channels respectively to extract "concepts".
-			2. Define how the amount of downsampling, spatial size of input, etc, 
-				map into the fully connected (FC) input dimension.
-			3. Specify fully connected network having 1 hidden layer with width=hidden_layer_nodes.
-		'''
+                hidden_layer_nodes, output_layer_nodes):		
 		super().__init__()
 		
 		## 1. Convolve the tensor using 2 convolutional layers
@@ -75,7 +74,7 @@ class ConvNet(Module):
 																		 64   # must = last Conv1d's out channels
 																		)
 		self.fc_layers = Sequential(Linear(self.N_EXTRACTED_FEATURES, hidden_layer_nodes),
-											 Linear(hidden_layer_nodes, output_layer_nodes)   # there are 5 news sections for the BBC News dataset.
+											 Linear(hidden_layer_nodes, output_layer_nodes)   # there are 20 newsgroups
 											)
 
 	def forward(self, _input):

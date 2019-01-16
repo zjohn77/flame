@@ -8,5 +8,5 @@ python usage news
 python usage newsgrp
 
 cd test
-python -m unittest discover -v
+python -m unittest
 ```

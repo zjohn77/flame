@@ -2,11 +2,10 @@
 Test the usage module's functions: extract_data, reshape. 
 """
 from unittest import TestCase
-
 from pathlib import Path
-import sys
 module_path = Path(__file__).resolve().parents[1] ## cd ..
-sys.path.insert(0, str(module_path))
+import sys; sys.path.insert(0, str(module_path))
+
 from usage import extract_data, reshape
 
 class Usage(TestCase):
@@ -29,6 +28,7 @@ class Usage(TestCase):
       DATA = {'arts': [4],
               'tech': [6, 9]
              }
-      self.assertEqual(reshape(DATA),
-                       ([4, 6, 9], [0, 1, 1])
-                      )
+      self.assertTrue(reshape(DATA) == ([4, 6, 9], 
+                                        [0, 1, 1]
+                                       )
+                     )

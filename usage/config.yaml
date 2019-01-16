@@ -1,9 +1,10 @@
 news:
     kernel_size: 5
     stride: 1
-    learn_rate: 0.001
+    learn_rate: 0.0005
     n_epochs: 40
-    hidden_layer_nodes: 200
+    hidden_layer_nodes: 100
+    output_layer_nodes: 5
 
 newsgrp:
     kernel_size: 5
@@ -11,3 +12,4 @@ newsgrp:
     learn_rate: 0.001
     n_epochs: 40
     hidden_layer_nodes: 100
+    output_layer_nodes: 20
