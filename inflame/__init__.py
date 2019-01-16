@@ -5,7 +5,7 @@ from .data import data_pipeline
 from .models.news import ConvNet    # .news customizable to another model
 from .train import train_model
 
-def main(data, target, config):
+def build_model(data, target, config):
    '''API that takes raw data in lists and returns a pytorch model object.
    '''
    ## Shape data into pytorch Datasets (batch data according to loader.py to reducing RAM use).
@@ -15,7 +15,7 @@ def main(data, target, config):
    ## Call generic train_model wrapper with the ConvNet model type.                                                   
    model = train_model(training_batches,
                        validati_batches,
-                       ConvNet(input_length = 200,
+                       ConvNet(input_length = 200, # similar to pixels in vision
                                channels = 50,
                                kernel_size = config['kernel_size'],
                                stride = config['stride'],
