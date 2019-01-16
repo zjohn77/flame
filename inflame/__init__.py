@@ -16,8 +16,8 @@ def build_model(data, target, config):
    ## Call generic train_model wrapper with the ConvNet model type.                                                   
    model = train_model(training_batches,
                        validati_batches,
-                       ConvNet(input_length = 600, # similar to pixels in vision
-                               channels = 50,
+                       ConvNet(input_length = config['input_length'], # similar to pixels in vision
+                               channels = config['channels'],
                                kernel_size = config['kernel_size'],
                                stride = config['stride'],
                                padding = int((config['kernel_size'] - 1) / 2), # constrained to fix spatial size during convolution
