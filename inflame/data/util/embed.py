@@ -15,7 +15,7 @@ def pipe(*args):
 class NLP:
    def __init__(self, docs):
       self.__DOCS = docs
-      self.__FIXED_DOCSIZE = 200
+      self.__FIXED_DOCSIZE = 600
       self.__WORD_VECS = load("glove-wiki-gigaword-50") ## Set an embedder that takes a text arg & embeds it.
 
    def _initialize(self):
