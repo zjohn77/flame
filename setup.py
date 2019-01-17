@@ -5,7 +5,7 @@ with open("README.md") as f:
 
 setup(
    name="inflame",
-   version="0.8.0",
+   version="0.10.0",
    license='MIT',
    description="Deep learning applied to text classification, in PyTorch",
    long_description=long_description,
