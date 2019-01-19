@@ -5,7 +5,7 @@ with open("README.md") as f:
 
 setup(
    name="inflame",
-   version="0.11.2",
+   version="0.12.2",
    license='MIT',
    description="Convolutional Neural Networks--made easy to reapply to new problems",
    long_description=long_description,
@@ -24,9 +24,8 @@ setup(
       'numpy>=1.15',
       'torch>=0.4',
       'scikit_learn>=0.20',
-      'PyYAML>=3',
       'gensim>=3',
       'corpus4classify>=0.1'
    ],
-   packages=find_packages()
+   packages=['inflame', 'data', 'models', 'train']
 )
