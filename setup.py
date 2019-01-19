@@ -5,14 +5,14 @@ with open("README.md") as f:
 
 setup(
    name="inflame",
-   version="0.10.0",
+   version="0.11.2",
    license='MIT',
-   description="Deep learning applied to text classification, in PyTorch",
+   description="Convolutional Neural Networks--made easy to reapply to new problems",
    long_description=long_description,
    long_description_content_type="text/markdown",
+   url="https://github.com/zjohn77/inflame",
    author="John Jung",
    author_email="tojohnjung@gmail.com",
-   url="https://github.com/zjohn77/inflame",
    classifiers=[
       "Programming Language :: Python :: 3",
       "License :: OSI Approved :: MIT License",
@@ -25,7 +25,8 @@ setup(
       'torch>=0.4',
       'scikit_learn>=0.20',
       'PyYAML>=3',
-      'gensim>=3'
+      'gensim>=3',
+      'corpus4classify>=0.1'
    ],
    packages=find_packages()
 )

@@ -1,28 +1,27 @@
-import sys
 from pathlib import Path
-module_path = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(module_path))
-from inflame import build_model
+import os; os.chdir(str(Path(__file__).resolve().parents[0]))
+
+# module_path = Path(__file__).resolve().parents[0]
+# import sys; sys.path.insert(0, str(module_path))
+
+from .__init__ import build_model
 from yaml import safe_load
+from argparse import ArgumentParser
+from corpus4classify import controller
+
+# Pick the corpus to load at the command line by supplying the --corpus flag.
+parser = ArgumentParser()
+parser.add_argument('--corpus', action='store', dest='corpus')
+CORPUS = parser.parse_args().corpus
 
 def main():
-   # Load hyperparameters from the news section.
-   CONFIG_FILE = module_path / 'inflame' / 'config.yaml'
-   try:
-      EXAMPLE = sys.argv[1]   
-      config = safe_load(open(CONFIG_FILE))[EXAMPLE] 
-   except:
-      print("ERROR: Proper example name argument wasn't found behind the run script command.")
+   ## 1. Load data & target from the corpus flagged by the command line argument.
+   data, target = controller(CORPUS)
 
-   # Pick example.
-   if EXAMPLE == 'news':
-      import usage.news_classify as nc 
-      build_model(nc.data, nc.target, config)
-   elif EXAMPLE == 'newsgrp':
-      import usage.newsgrp_classify as ngc 
-      build_model(ngc.data, ngc.target, config)
-   else:
-      raise Exception("Example not found.")
+   ## 2. Load hyperparameters from the section named CORPUS.
+   config = safe_load(open('config.yaml'))[CORPUS] 
+
+   return build_model(data, target, config)
 
 if __name__ == "__main__":
    main()

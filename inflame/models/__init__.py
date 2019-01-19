@@ -1,2 +1,1 @@
-from .newsgrp import *
-from .news import *
+from .bbcnews import *

@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 
 def data_pipeline(data, target: 'lists of texts'):
    '''Split into train/test; embed text into vectors; then create Dataloaders.'''
-   # Stratified sample the data and target into training and validation datasets.
+   ## 1. Stratified sample the data and target into training and validation datasets.
    (data_trn, data_vld,
    target_trn, target_vld) = train_test_split(data, 
                                               target,
@@ -19,11 +19,11 @@ def data_pipeline(data, target: 'lists of texts'):
                                               random_state = 999
                                              )
 
-   # Embed data.
+   ## 2. Embed data.
    embedding_trn = NLP(data_trn).embed()
    embedding_vld = NLP(data_vld).embed()
 
-   # Standardize numpy tensors and convert them to pytorch tensors.
+   ## 3. Standardize numpy tensors and convert them to pytorch tensors.
    training_batches = mk_dataloader(standardize_dataset(embedding_trn, 
                                                         target_trn
                                                        )
