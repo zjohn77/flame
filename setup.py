@@ -5,7 +5,7 @@ with open("README.md") as f:
 
 setup(
    name="inflame",
-   version="0.12.2",
+   version="0.12.3",
    license='MIT',
    description="Convolutional Neural Networks--made easy to reapply to new problems",
    long_description=long_description,
