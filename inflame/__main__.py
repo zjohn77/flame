@@ -15,15 +15,15 @@ from corpus4classify import getdata
 
 # The 'data' can be plugged with any custom data pipeline as long as 
 # it maps (data, target) to (training_batches, validati_batches) like the api below.
-from data import data_pipeline   
+from inflame.data import data_pipeline   
 
 # The 'train' can be swapped with another module to customize: the optimizer (default: Adam),
 # the loss function (default: CrossEntropy), or the accuracy measure (defined by the Accuracy class).
-from train import train_model
+from inflame.train import train_model
 
 # The 'bbcnews' or 'newsgrp' are customizable to another model.
-from models.newsgrp import ConvNet
-import params.newsgrp as params  # Get the hyperparameters related to this corpus.
+from inflame.models.newsgrp import ConvNet
+import inflame.params.newsgrp as params  # Get the hyperparameters related to this corpus.
 
 # Pick the corpus to load at the command line.
 from argparse import ArgumentParser

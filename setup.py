@@ -5,7 +5,7 @@ with open("README.md") as f:
 
 setup(
    name="inflame",
-   version="0.12.3",
+   version="0.12.7",
    license='MIT',
    description="Convolutional Neural Networks--made easy to reapply to new problems",
    long_description=long_description,
@@ -27,5 +27,10 @@ setup(
       'gensim>=3',
       'corpus4classify>=0.1'
    ],
-   packages=['inflame', 'data', 'models', 'train']
+   packages=find_packages(),
+   entry_points = {
+        "console_scripts": [
+            "inflame_run = inflame.__main__:main"
+        ]
+    }
 )
