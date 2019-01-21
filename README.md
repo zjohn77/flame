@@ -3,15 +3,20 @@
 2. Is the process of converting a deep learning model from development to production a pain point for you?
 3. How maintainable is your deep learning model code base?
 
-PyTorch is among the best deep learning frameworks out there. It's relatively easy to use and the coding style is readable and pythonic. Nevertheless, there's still a fair amount of boilerplate code and hard-coded numbers in a typical pytorch project. The goal of this project (a.k.a. inflame) is to abstract away the pieces that remain the same from model to model, so that the same deep learning template, or archetype, can be quickly reapplied to new problems. 
+## 2. The design
+The idea of the inflame project (built on top of PyTorch) is to extend PyTorch by allowing one to easily create templates of the deep learning models. Most deep learning model codes are basically prototypes. Having evolved from multiple iterations of trial and error, deep learning model codebases tend to have a lot of hardcoding of values, and they tend to be large single-file beasts. The result is that they are hard to understand, debug, and reuse on new problems. Inflame helps solve this problem by organizing the deep learning model code around concerns. The data, model architecture, hyperparameter, backpropagation, and accuracy evaluation -- each of these domains of functionality is its own module. By organizing and API-ing the code via design patterns, the same deep learning model can be reused from project to project with the smallest number of obvious customizations.
 
-## 2. Install
+## 3. Install
 ```sh
 pip install inflame
 ```
 
-## 3. Quick Start
+## 4. Quick start
+To run the demo project that classifies news articles using convolutional net:
 ```sh
-python -m inflame news
-python -m inflame newsgrp
+inflame_run --corpus bbcnews
+```
+To run the demo project that classifies newsgroup posts using convolutional net:
+```sh
+inflame_run --corpus newsgrp
 ```

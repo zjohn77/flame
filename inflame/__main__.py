@@ -1,47 +1,45 @@
 """
 Defines the main function, which processes raw data, builds model, and prints 
 the out-of-sample performance of the model. How each of those actions is implemented is specified
-in the 'data', 'models', and 'train' modules respectively.
+in the 'data', 'models', 'params', and 'train' modules.
 """
-# from pathlib import Path
-# import sys; sys.path.insert(0, Path(__file__).absolute().parent)
-# import os
-# PACKAGE_PARENT = '..'
-# SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
-# sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
-
-# Gets the dataset corresponding to its argument: name of the corpus. 
-from corpus4classify import getdata  
+from argparse import ArgumentParser  # Pick the corpus to load at the command line.
+from corpus4classify import getdata  # Gets the dataset corresponding to its argument: name of the corpus. 
 
 # The 'data' can be plugged with any custom data pipeline as long as 
 # it maps (data, target) to (training_batches, validati_batches) like the api below.
-from inflame.data import data_pipeline   
+from inflame.data import data_pipeline
 
 # The 'train' can be swapped with another module to customize: the optimizer (default: Adam),
 # the loss function (default: CrossEntropy), or the accuracy measure (defined by the Accuracy class).
 from inflame.train import train_model
 
-# The 'bbcnews' or 'newsgrp' are customizable to another model.
-from inflame.models.newsgrp import ConvNet
-import inflame.params.newsgrp as params  # Get the hyperparameters related to this corpus.
+## Enables the use of a command line switch to choose the corpus to load. 
+parser = ArgumentParser()
+parser.add_argument('--corpus', action='store', dest='corpus')
+CORPUS_NAME = parser.parse_args().corpus
 
-# Pick the corpus to load at the command line.
-from argparse import ArgumentParser
+# The 'bbcnews' or 'newsgrp' are customizable to another model. The params module holds
+# the hyperparameters related to the specific corpus.
+if CORPUS_NAME == 'bbcnews':
+   from inflame.models.bbcnews import ConvNet
+   import inflame.params.bbcnews as params
+elif CORPUS_NAME == 'newsgrp':
+   from inflame.models.newsgrp import ConvNet
+   import inflame.params.newsgrp as params
+else:
+   raise Exception('A valid corpus name was not entered via command line switch.')
 
 def main():
-   '''API that takes raw data in lists and returns a pytorch model object that can
+   '''API that processes raw data and returns a pytorch model object that can
    be used to predict the target for new tensors.
    '''
-   ## 1. Enables the use of a command line switch to choose the corpus to load. 
-   parser = ArgumentParser()
-   parser.add_argument('--corpus', action='store', dest='corpus')
-   
-   ## 2. Load data & target , 
-   # and shape data into pytorch Datasets (batch data according to loader.py to reducing RAM use).
-   training_batches, validati_batches = data_pipeline(*getdata(parser.parse_args().corpus)
+   ## 1. Using CORPUS_NAME passed from CLI, loads data & targe, and shapes data into pytorch Datasets 
+   # (batch data according to loader.py to reducing RAM use).
+   training_batches, validati_batches = data_pipeline(*getdata(CORPUS_NAME)
                                                      )
    
-   ## 3. Call generic train_model wrapper with the ConvNet model type.                                                 
+   ## 2. Calls generic train_model wrapper with the ConvNet model type.                                                 
    return train_model(training_batches,
                       validati_batches,
                       ConvNet(input_length = params.input_length, # similar to pixels in vision
