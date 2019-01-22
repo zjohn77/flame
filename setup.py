@@ -29,8 +29,8 @@ setup(
    ],
    packages=find_packages(),
    entry_points = {
-        "console_scripts": [
-            "inflame_run = inflame.__main__:main"
-        ]
-    }
+      "console_scripts": [
+         "inflame_run = inflame.__main__:main"
+      ]
+   }
 )
