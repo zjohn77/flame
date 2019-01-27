@@ -1,3 +1,7 @@
+[![License](https://img.shields.io/github/license/zjohn77/inflame.svg)](https://github.com/zjohn77/inflame/blob/master/LICENSE.md)
+[![PyPI](https://img.shields.io/pypi/v/inflame.svg)](https://pypi.org/project/inflame/)
+
+
 ## 1. The problem this project is trying to solve
 1. Can you easily repurpose the deep learning model you just built to a new problem?
 2. Is converting a deep learning model from development to production a cumbersome task for you?
