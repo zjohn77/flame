@@ -24,6 +24,7 @@ To run the demo project that classifies newsgroup posts using convolutional net:
 ```sh
 inflame_run --corpus newsgrp
 ```
+Read [this guide](https://zjohn77.github.io/blog/posts/convnet/) to understand the design, and for an example of using the inflame package for text analysis.
 
 ## 5. Contribute
 Any contribution is welcome. To get started:
